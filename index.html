@@ -10,13 +10,16 @@
   <body>
     <h1>Pokemon Search App</h1>
     <div>
-      <input id="search-input" />
-      <button id="search-button" type="submit">Search</button>
+      <form id="search-form">
+        <input id="search-input" type="text" required />
+        <button id="search-button" type="submit">Search</button>
+      </form>
       <h3 id="pokemon-name">name</h3>
       <p id="pokemon-id">id</p>
       <p id="weight">weight</p>
       <p id="height">height</p>
       <p id="types">types</p>
+      <img id="poke-img" />
       <table id="pokemon-ouput">
         <tr>
           <th>Base</th>
