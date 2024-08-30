@@ -6,7 +6,7 @@ const idOutput = document.getElementById("pokemon-id");
 const weightOutput = document.getElementById("weight");
 const heightOutput = document.getElementById("height");
 const typesOutput = document.getElementById("types");
-const imgElement = document.getElementById("poke-img");
+const imgElement = document.getElementById("sprite");
 const hpOutput = document.getElementById("hp");
 const attackOutput = document.getElementById("attack");
 const defenseOutput = document.getElementById("defense");
@@ -15,14 +15,14 @@ const specialDefenseOutput = document.getElementById("special-defense");
 const speedOutput = document.getElementById("speed");
 
 searchForm.addEventListener("submit", async (e) => {
-    console.log(e);
+  console.log(e);
   e.preventDefault();
 
   const text = searchInput?.value;
 
   const pokemon = await fetchPokemon(text?.toLowerCase());
 
-  if(!pokemon){
+  if (!pokemon) {
     alert("Pokémon not found");
     return;
   }
@@ -52,11 +52,10 @@ const fetchPokemon = async (searchText) => {
 
 const populatePokemonData = (pokemon) => {
   nameOutput.textContent = pokemon.name.toUpperCase();
-  idOutput.textContent = "Id: " + pokemon.id;
-  weightOutput.textContent = "Weight: " + pokemon.weight;
-  heightOutput.textContent = "Height: " + pokemon.height;
-  typesOutput.textContent =
-    "Types: " + pokemon.types.map((x) => x.type.name).join(", ");
+  idOutput.textContent = pokemon.id;
+  weightOutput.textContent = pokemon.weight;
+  heightOutput.textContent = pokemon.height;
+  typesOutput.innerHTML = buildTypesElements(pokemon.types);
   imgElement.src = pokemon.sprites.front_default;
   hpOutput.textContent = pokemon.stats.find(
     (x) => x.stat.name === "hp"
@@ -77,3 +76,8 @@ const populatePokemonData = (pokemon) => {
     (x) => x.stat.name === "speed"
   ).base_stat;
 };
+
+const buildTypesElements = types => {
+   //return types.map((x) => x.type.name.toUpperCase()).join(", ");
+  return types.map(type => `<div>${type.type.name.toUpperCase()}</div>`).join('');
+}
